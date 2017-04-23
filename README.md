@@ -9,4 +9,4 @@
 
 <h3>使用方法</h3>
 <h4>　各自の環境でコンパイル後、EXEファイルを実行<h4>
-<h4>　コンパイル例(GCC)：g++ -mwindows main.cpp -o Coder-Assist.exe</h4>
+<h3>　コンパイル例(GCC)：g++ -mwindows main.cpp -o Coder-Assist.exe</h3>
