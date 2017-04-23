@@ -8,4 +8,4 @@
 <h4>　ctrl + alt + A </h4>
 
 <h3>使用方法</h3>
-<h4>　各自の環境でコンパイル後、実行ファイルを実行<br><br>　コンパイル時は「-mwindows」オプションをお付け下さい</h4>
+<h4>　各自の環境でコンパイル後、EXEファイルを実行<br><br>　コンパイル例(GCC)：g++ -mwindows main.cpp -o Coder-Assist.exe</h4>
