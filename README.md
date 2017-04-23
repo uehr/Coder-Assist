@@ -1,7 +1,7 @@
 <h1>Coder-Assist</h1>
 <p>windows上の括弧、クォーテーションの入力をアシスト</p>
 
-<img src="http://i.imgur.com/zzWZfYn.gifv" title="source: imgur.com">
+<a href="http://i.imgur.com/zzWZfYn"><img src="http://i.imgur.com/zzWZfYn.gifv" title="source: imgur.com"></a>
 <h3>対応記号</h3>
 <h4>　「」, (),  [],【】,『』, {}, 《》, <>, "", '' </h4>
 
