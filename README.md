@@ -1,5 +1,5 @@
 <h1>Coder-Assist</h1>
-<p>windows上の括弧、クォーテーションの入力をアシスト</p>
+<p>windows上での括弧、クォーテーションの入力をアシスト</p>
 
 <a href="http://imgur.com/zzWZfYn"><img src="http://i.imgur.com/zzWZfYn.gif" title="source: imgur.com" /></a>
 <h3>対応記号</h3>
