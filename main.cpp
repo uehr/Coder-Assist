@@ -11,6 +11,7 @@ using namespace std;
 bool checked_key, aim_key_pushing, is_run = true;
 
 
+
 int add_aim_key(int check_key,int next_check_key,int put_key,bool shift_pushing){
   aim_key_pushing= false;
   checked_key = GetAsyncKeyState(check_key) && 0x80;
@@ -38,6 +39,7 @@ int add_aim_key(int check_key,int next_check_key,int put_key,bool shift_pushing)
   }
   return 0;
 }
+
 
 int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow ){
   while(true){
