@@ -40,7 +40,7 @@ int add_aim_key(int check_key,int next_check_key,int put_key,bool shift_pushing)
 
 
 int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow ){
-  MessageBox(NULL, TEXT("Coder-Assist started"), "Coder-Assist", MB_OK);
+  MessageBox(NULL, "Coder-Assist started", "Coder-Assist", MB_OK);
   while(true){
     if((GetAsyncKeyState(toggle_key1) && 0x80) &&
        (GetAsyncKeyState(toggle_key2) && 0x80) &&
