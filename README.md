@@ -6,3 +6,6 @@
 
 <h3>on/offスイッチ</h3>
 <h4>　ctrl + alt + A </h4>
+
+<h3>使用方法</h3>
+<h4>　各自の環境でコンパイル後、実行ファイルを実<br>　GCC）g++ -mwindows main.cpp -o Coder-Assist.exe </h4>
