@@ -41,7 +41,7 @@ int add_aim_key(int check_key,int next_check_key,int put_key,bool shift_pushing)
 
 int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow ){
   MessageBox(NULL, "Coder-Assist started", "Coder-Assist", MB_OK);
-  
+
   while(true){
     if((GetAsyncKeyState(toggle_key1) && 0x80) &&
        (GetAsyncKeyState(toggle_key2) && 0x80) &&
@@ -52,7 +52,7 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLin
     }
     if(is_run){
         add_aim_key(VK_OEM_4, 0, VK_OEM_6, false);
-        add_aim_key(VK_SHIFT, VK_OEM_COMMA, VK_OEM_PERIOD, true);
+        add_aim_key(VK_OEM_COMMA, VK_SHIFT, VK_OEM_PERIOD, true);
         add_aim_key('8', VK_SHIFT,'9', true);
         add_aim_key('2', VK_SHIFT,'2', true);
         add_aim_key('7', VK_SHIFT,'7', true);
