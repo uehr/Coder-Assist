@@ -10,4 +10,4 @@
 
 <h3>使用方法</h3>
 <p>　各自の環境でコンパイル後、EXEファイルを実行<br>
-　コンパイル例(GCC)：g++ -mwindows main.cpp -o Coder-Assist.exe</p>
+　コンパイル例(GCC)：g++ -mwindows main.cpp -o Coder-Assist.exe </p>
