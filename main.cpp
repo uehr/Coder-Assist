@@ -62,11 +62,8 @@ int add_aim_key(int check_key,int next_check_key,int enter_key){
     if(GetAsyncKeyState(check_key) && 0x80)
       aim_key_pushing = true;
   }else{
-    if(((GetAsyncKeyState(next_check_key) && 0x80) == 1) && ((GetAsyncKeyState(check_key) && 0x80) == 1)) {
+    if(((GetAsyncKeyState(next_check_key) && 0x80) == 1) && ((GetAsyncKeyState(check_key) && 0x80) == 1)) 
       aim_key_pushing = true;
-      cout << "check_key: " << (GetAsyncKeyState(next_check_key) && 0x80) << endl;
-      cout << "next_check_key: " << (GetAsyncKeyState(check_key) && 0x80) << endl;
-    }
   }
 
   if(aim_key_pushing){
