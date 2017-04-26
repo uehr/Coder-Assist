@@ -6,6 +6,8 @@
 
 #pragma comment( lib, "psapi.lib" )
 
+#define app_name "Coder-Assist"
+#define exe_name "Coder-Assist.exe"
 #define toggle_key1 VK_LCONTROL // ctrl
 #define toggle_key2 VK_LMENU // alt
 #define toggle_key3 'A'
@@ -38,7 +40,7 @@ int check_process_overlap() {
             }
             CloseHandle( hProcess );
         }
-        if(strstr(szFile,"Coder-Assist.exe") != NULL)
+        if(strstr(szFile, exe_name) != NULL)
           result_buf++;
     }
 
@@ -55,13 +57,16 @@ int add_aim_key(int check_key,int next_check_key,int enter_key){
        aim_key_pushing;
 
   aim_key_pushing= false;
-  
+
   if(!next_check_key){
     if(GetAsyncKeyState(check_key) && 0x80)
       aim_key_pushing = true;
   }else{
-    if((GetAsyncKeyState(check_key) && 0x80) && (GetAsyncKeyState(next_check_key) && 0x80))
+    if(((GetAsyncKeyState(next_check_key) && 0x80) == 1) && ((GetAsyncKeyState(check_key) && 0x80) == 1)) {
       aim_key_pushing = true;
+      cout << "check_key: " << (GetAsyncKeyState(next_check_key) && 0x80) << endl;
+      cout << "next_check_key: " << (GetAsyncKeyState(check_key) && 0x80) << endl;
+    }
   }
 
   if(aim_key_pushing){
@@ -78,6 +83,7 @@ int add_aim_key(int check_key,int next_check_key,int enter_key){
     //補完後、一文字分左へ移動
     keybd_event(VK_LEFT,0,0,0);
     keybd_event(VK_LEFT,0,KEYEVENTF_KEYUP,0);
+
     Sleep(wait_nsec);
   }
 
@@ -90,11 +96,11 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLin
 
   if(check_process_overlap() == 1) {
     MessageBeep( MB_OK );
-    MessageBox(NULL, "is already started", "Coder-Assist", MB_OK);
+    MessageBox(NULL, "is already started", app_name, MB_OK);
     return -1;
   };
 
-  MessageBox(NULL, "Coder-Assist started", "Coder-Assist", MB_OK);
+  MessageBox(NULL, "Coder-Assist started", app_name, MB_OK);
 
   while(true){
     //トグルキーが押されるとon/off切り替え
