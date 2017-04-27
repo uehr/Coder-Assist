@@ -1,3 +1,8 @@
+/*
+  コンパイルコマンド(gcc)
+  g++ -mwindows main.cpp -o Coder-Assist.exe -lpsapi
+*/
+
 #include <windows.h>
 #include <iostream>
 #include <psapi.h>
