@@ -1,3 +1,8 @@
+/*
+  コンパイルコマンド(gcc)
+  g++ -mwindows main.cpp -o Coder-Assist.exe -lpsapi
+*/
+
 #include <windows.h>
 #include <iostream>
 #include <psapi.h>
@@ -81,9 +86,16 @@ int check_and_click(int check_key,int next_check_key,int enter_key){
   if(!next_check_key)
     if(GetAsyncKeyState(check_key) && 0x80)
       aim_key_pushing = true;
+<<<<<<< HEAD
   else //二段階で確認しないとバグが発生
     if(is_pushing_key(next_check_key,check_key))
         if(is_pushing_key(next_check_key,check_key))
+=======
+  }else{
+    //二段階でチェックしないとバグ発生
+    if(((GetAsyncKeyState(next_check_key) && 0x80) == 1) && ((GetAsyncKeyState(check_key) && 0x80) == 1))
+        if(((GetAsyncKeyState(next_check_key) && 0x80) == 1) && ((GetAsyncKeyState(check_key) && 0x80) == 1))
+>>>>>>> bc34c08906175909f63604ebbcd653c40b6322fe
           aim_key_pushing = true;
 
   if(aim_key_pushing){
