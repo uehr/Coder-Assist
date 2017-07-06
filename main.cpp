@@ -51,36 +51,53 @@ int check_process_overlap() {
     return 0;
 }
 
-int add_aim_key(int check_key,int next_check_key,int enter_key){
+bool is_pushing_key(DWORD check_key){
+  if(GetAsyncKeyState(check_key) && 0x80) return true;
+  return false;
+}
+
+bool is_pushing_key(DWORD check_key,DWORD check_key2){
+    if(GetAsyncKeyState(check_key) && 0x80) return true;
+    return false;
+}
+
+bool is_pushing_key(DWORD check_key,DWORD check_key2,DWORD check_key3){
+    if((GetAsyncKeyState(check_key) && 0x80) && (GetAsyncKeyState(check_key2) && 0x80) && (GetAsyncKeyState(check_key3) && 0x80)) return true;
+    return false;
+}
+
+void one_push(DWORD check_key){
+  keybd_event(check_key,0,0,0);
+  keybd_event(check_key,0,KEYEVENTF_KEYUP,0);
+}
+
+int check_and_click(int check_key,int next_check_key,int enter_key){
   bool checked_key,
        checked_next_key,
        aim_key_pushing;
 
   aim_key_pushing= false;
 
-  if(!next_check_key){
+  if(!next_check_key)
     if(GetAsyncKeyState(check_key) && 0x80)
       aim_key_pushing = true;
-  }else{
-    if(((GetAsyncKeyState(next_check_key) && 0x80) == 1) && ((GetAsyncKeyState(check_key) && 0x80) == 1))
-        if(((GetAsyncKeyState(next_check_key) && 0x80) == 1) && ((GetAsyncKeyState(check_key) && 0x80) == 1))
+  else //二段階で確認しないとバグが発生
+    if(is_pushing_key(next_check_key,check_key))
+        if(is_pushing_key(next_check_key,check_key))
           aim_key_pushing = true;
-  }
 
   if(aim_key_pushing){
     //補完記号が シフト + Nキー ならシフトを押す
     if(VK_SHIFT == (check_key | next_check_key))
       keybd_event(VK_SHIFT,0,0,0);
 
-    keybd_event(enter_key,0,0,0);
-    keybd_event(enter_key,0,KEYEVENTF_KEYUP,0);
+    one_push(enter_key);
 
     if(VK_SHIFT == (check_key | next_check_key))
       keybd_event(VK_SHIFT,0,KEYEVENTF_KEYUP,0);
 
     //補完後、一文字分左へ移動
-    keybd_event(VK_LEFT,0,0,0);
-    keybd_event(VK_LEFT,0,KEYEVENTF_KEYUP,0);
+    one_push(VK_LEFT);
 
     Sleep(wait_nsec);
   }
@@ -102,20 +119,17 @@ int WINAPI WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLin
 
   while(true){
     //トグルキーが押されるとon/off切り替え
-    if((GetAsyncKeyState(toggle_key1) && 0x80) &&
-       (GetAsyncKeyState(toggle_key2) && 0x80) &&
-       (GetAsyncKeyState(toggle_key3) && 0x80))
-    {
+    if(is_pushing_key(toggle_key1,toggle_key2,toggle_key3)) {
       is_run = !is_run;
       Sleep(1000);
     }
 
     if(is_run){
-        add_aim_key(VK_OEM_4, 0, VK_OEM_6); //[],「」, {}, 【】
-        add_aim_key(VK_OEM_COMMA, VK_SHIFT, VK_OEM_PERIOD); //<>
-        add_aim_key('8', VK_SHIFT, '9'); //()
-        add_aim_key('2', VK_SHIFT, '2'); //""
-        add_aim_key('7', VK_SHIFT, '7'); //''
+        check_and_click(VK_OEM_4, 0, VK_OEM_6); //[],「」, {}, 【】
+        check_and_click(VK_OEM_COMMA, VK_SHIFT, VK_OEM_PERIOD); //<>
+        check_and_click('8', VK_SHIFT, '9'); //()
+        check_and_click('2', VK_SHIFT, '2'); //""
+        check_and_click('7', VK_SHIFT, '7'); //''
     }
     Sleep(10);
   }
